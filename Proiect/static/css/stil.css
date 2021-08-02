@@ -1,0 +1,86 @@
+/* pentru navbar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  justify-content: center;
+  display: flex;
+  background-color:rgba(34, 34, 34, 0.747);
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  padding: 8px;
+  color: rgba(0, 162, 255, 0.74);
+  font-size: larger;
+  font-weight: bold;
+   }
+/* end of navbar*/
+
+h1{
+  text-shadow: 3px 3px#d1d1d154;
+  text-align: center;
+}
+
+h2{
+
+text-align: center;
+}
+
+h3{
+text-shadow: 3px 3px #d1d1d154;
+text-align: center;
+}
+
+body {
+background: linear-gradient(-45deg, #52ee86, #3ce7de, #18d376, #abd413);
+background-size: 400% 400%;
+-webkit-animation: gradient 15s ease infinite;
+        animation: gradient 15s ease infinite;
+
+}
+
+#page-container {
+position: relative;
+min-height: 100vh;
+}
+
+#content-wrap {
+padding-bottom: 2.5rem;   
+}
+
+#footer {
+position: absolute;
+bottom: 0;
+width: 100%;
+height: 2.5rem;            
+}
+
+@-webkit-keyframes gradient {
+0% {
+  background-position: 0% 50%;
+}
+50% {
+  background-position: 100% 50%;
+}
+100% {
+  background-position: 0% 50%;
+}
+}
+
+@keyframes gradient {
+0% {
+  background-position: 0% 50%;
+}
+50% {
+  background-position: 100% 50%;
+}
+100% {
+  background-position: 0% 50%;
+}
+}
