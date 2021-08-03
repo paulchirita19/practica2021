@@ -60,12 +60,10 @@ def calculare_rezultat_asteptat(echipa1,echipa2):
     scor1 , scor2 = calculare_scor(echipa1,echipa2)
     rezultat_asteptat = [0 for i in range(len(scor1))] 
     for i in range(len(scor1)):
-        if scor1[i] < scor2[i]:
+        if scor1[i] <= scor2[i]:
             rezultat_asteptat[i] = 0
-        elif scor1[i] > scor2[i]:
-            rezultat_asteptat[i] = 1
         else:
-            rezultat_asteptat[i] = 0 #trebuie refacut la egal
+            rezultat_asteptat[i] = 1
     
     return np.array([rezultat_asteptat]).T
 
@@ -120,21 +118,20 @@ def train_team_scor(echipa1,echipa2):
 
 def calculare_ma_predictii(echipa1,echipa2):
     predictie = train_team_scor(echipa1,echipa2)
-    print("Predictie:")
     for i in range(len(predictie)):
         if predictie[i] < 0.5:
             predictie[i] = 0
         else:
             predictie[i] = 1
-    return np.mean(predictie.T)
+    return np.nanmean(predictie)
 
 
 def calculare_predictie(echipa1,echipa2):
     ma = calculare_ma_predictii(echipa1,echipa2)
-    if ma <= 0.5:
-        str1 = echipa2 + " castiga"
+    if ma >= 0.5:
+        str1 = echipa1 + " -> Sansa victorie :"+"{:.2f}".format(100*ma)+"%"
     else:
-        str1 = echipa1 + " castiga"
+        str1 = echipa2 + " -> Sansa victorie :"+"{:.2f}".format(100*(1-ma))+"%"
     return str1
 
 
@@ -160,8 +157,8 @@ def map_marker():
     #print("inputs", inputs ,file=sys.stdout)
     #print("rezultat_asteptat \n", expected_output.T ,file=sys.stdout)
     #print(afisare_predictie() ,"\n")
-    vec_std = { 0: [folium.IFrame("<b> Nume stadion:" + nume_stadion[0]+ " </b> <br>"+echipe[1]+" vs " + echipe[0] +" </br> <br> Predictie: " + calculare_predictie(echipe[1],echipe[0]) + "</br>")],
-                1: [folium.IFrame("<b> Nume stadion:" + nume_stadion[1]+ " </b> <br>"+echipe[4]+" vs " + echipe[2] +" </br> <br> Predictie: " + calculare_predictie(echipe[4],echipe[2]) + "</br>")],
+    vec_std = { 0: [folium.IFrame("<b> Nume stadion:" + nume_stadion[0]+ " </b> <br>"+echipe[0]+" vs " + echipe[1] +" </br> <br> Predictie: " + calculare_predictie(echipe[0],echipe[1]) + "</br>")],
+                1: [folium.IFrame("<b> Nume stadion:" + nume_stadion[1]+ " </b> <br>"+echipe[2]+" vs " + echipe[4] +" </br> <br> Predictie: " + calculare_predictie(echipe[2],echipe[4]) + "</br>")],
                 2: [folium.IFrame("<b> Nume stadion:" + nume_stadion[2]+ " </b> <br>"+echipe[3]+" vs " + echipe[5] +" </br> <br> Predictie: " + calculare_predictie(echipe[3],echipe[5]) + "</br>")]}
 
     #iframe = folium.IFrame("<b> Nume stadion:" + nume_stadion[0]+ " </b> <br> Adversar: Liverpool </br> <br> Predictie: " + str(calculare_predictie()) + "-1 </br>")
